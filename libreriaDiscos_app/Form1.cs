@@ -27,14 +27,41 @@ namespace libreriaDiscos_app
                 DiscosNegocio datos = new DiscosNegocio();
                 ListaDiscos = datos.Listar();
                 dgvListaDiscos.DataSource = ListaDiscos;
-
-
+                dgvListaDiscos.Columns[0].Visible = false;
+                dgvListaDiscos.Columns[4].Visible = false;
+                cargarImagen(ListaDiscos[0].Urlimagen);
+                dgvListaDiscos.Columns[2].DefaultCellStyle.Format = "dd/MM/yyyy";
             }
             catch (Exception ex)
             {
 
                 MessageBox.Show(ex.ToString());
             }
+
+        }
+        private void cargarImagen(string imagen)
+        {
+            try
+            {
+                ptbTapaDisco.Load(imagen);
+            }
+            catch (Exception ex)
+            {
+                ptbTapaDisco.Load("https://media.istockphoto.com/id/1147544807/es/vector/no-imagen-en-miniatura-gr%C3%A1fico-vectorial.jpg?s=612x612&w=0&k=20&c=Bb7KlSXJXh3oSDlyFjIaCiB9llfXsgS7mHFZs6qUgVk=");
+            }
+        }
+
+        private void dgvListaDiscos_SelectionChanged(object sender, EventArgs e)
+        {
+            if(dgvListaDiscos != null)
+            {
+                Discos seleccionado = (Discos)dgvListaDiscos.CurrentRow.DataBoundItem;
+                cargarImagen(seleccionado.Urlimagen);
+            }
+        }
+
+        private void ptbTapaDisco_Click(object sender, EventArgs e)
+        {
 
         }
     }

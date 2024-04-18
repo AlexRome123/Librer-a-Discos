@@ -25,9 +25,9 @@ namespace Negocio
                     aux.FechaLanzamiento = (DateTime)datos.Lector["FechaLanzamiento"];
                     aux.CantidadCanciones = (int)datos.Lector["CantidadCanciones"];
                     aux.Urlimagen = (string)datos.Lector["UrlImagenTapa"];
-                    aux.Estilo = new Estilos();
+                    //aux.Estilo = new Estilos();
                     aux.Estilo.Descripcion = (string)datos.Lector["Estilo"];
-                    aux.TipoEdicion = new TiposEdicion();
+                    //aux.TipoEdicion = new TiposEdicion();
                     aux.TipoEdicion.Descripcion = (string)datos.Lector["Edicion"];
 
                     lista.Add(aux);

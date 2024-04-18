@@ -29,10 +29,10 @@
         private void InitializeComponent()
         {
             this.dgvListaDiscos = new System.Windows.Forms.DataGridView();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.ptbTapaDisco = new System.Windows.Forms.PictureBox();
             this.panel1 = new System.Windows.Forms.Panel();
             ((System.ComponentModel.ISupportInitialize)(this.dgvListaDiscos)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ptbTapaDisco)).BeginInit();
             this.SuspendLayout();
             // 
             // dgvListaDiscos
@@ -42,14 +42,17 @@
             this.dgvListaDiscos.Name = "dgvListaDiscos";
             this.dgvListaDiscos.Size = new System.Drawing.Size(506, 379);
             this.dgvListaDiscos.TabIndex = 0;
+            this.dgvListaDiscos.SelectionChanged += new System.EventHandler(this.dgvListaDiscos_SelectionChanged);
             // 
-            // pictureBox1
+            // ptbTapaDisco
             // 
-            this.pictureBox1.Location = new System.Drawing.Point(123, 59);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(153, 153);
-            this.pictureBox1.TabIndex = 1;
-            this.pictureBox1.TabStop = false;
+            this.ptbTapaDisco.Location = new System.Drawing.Point(123, 59);
+            this.ptbTapaDisco.Name = "ptbTapaDisco";
+            this.ptbTapaDisco.Size = new System.Drawing.Size(153, 153);
+            this.ptbTapaDisco.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.ptbTapaDisco.TabIndex = 1;
+            this.ptbTapaDisco.TabStop = false;
+            this.ptbTapaDisco.Click += new System.EventHandler(this.ptbTapaDisco_Click);
             // 
             // panel1
             // 
@@ -64,13 +67,13 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
             this.Controls.Add(this.panel1);
-            this.Controls.Add(this.pictureBox1);
+            this.Controls.Add(this.ptbTapaDisco);
             this.Controls.Add(this.dgvListaDiscos);
             this.Name = "FrmPrincipal";
             this.Text = "Libreria DIscos";
             this.Load += new System.EventHandler(this.FrmPrincipal_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgvListaDiscos)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ptbTapaDisco)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -78,7 +81,7 @@
         #endregion
 
         private System.Windows.Forms.DataGridView dgvListaDiscos;
-        private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.PictureBox ptbTapaDisco;
         private System.Windows.Forms.Panel panel1;
     }
 }
