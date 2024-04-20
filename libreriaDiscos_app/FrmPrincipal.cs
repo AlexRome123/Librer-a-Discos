@@ -22,6 +22,10 @@ namespace libreriaDiscos_app
 
         private void FrmPrincipal_Load(object sender, EventArgs e)
         {
+            cargar();
+        }
+        private void cargar()
+        {
             try
             {
                 DiscosNegocio datos = new DiscosNegocio();
@@ -38,6 +42,7 @@ namespace libreriaDiscos_app
                 MessageBox.Show(ex.ToString());
             }
 
+            
         }
         private void cargarImagen(string imagen)
         {
@@ -60,9 +65,11 @@ namespace libreriaDiscos_app
             }
         }
 
-        private void ptbTapaDisco_Click(object sender, EventArgs e)
+        private void btnAgregar_Click(object sender, EventArgs e)
         {
-
+            FrmAltaDiscos alta = new FrmAltaDiscos();
+            alta.ShowDialog();
+            cargar();
         }
     }
 }

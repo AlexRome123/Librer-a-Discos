@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.Design;
 using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
 using Dominio;
@@ -25,9 +27,7 @@ namespace Negocio
                     aux.FechaLanzamiento = (DateTime)datos.Lector["FechaLanzamiento"];
                     aux.CantidadCanciones = (int)datos.Lector["CantidadCanciones"];
                     aux.Urlimagen = (string)datos.Lector["UrlImagenTapa"];
-                    //aux.Estilo = new Estilos();
                     aux.Estilo.Descripcion = (string)datos.Lector["Estilo"];
-                    //aux.TipoEdicion = new TiposEdicion();
                     aux.TipoEdicion.Descripcion = (string)datos.Lector["Edicion"];
 
                     lista.Add(aux);
@@ -41,6 +41,30 @@ namespace Negocio
             finally
             {
                 datos.cerrarConexion();
+            }
+        }
+        public void agregar(Discos nuevo)
+        {
+            AccesoDatos date = new AccesoDatos();
+            try
+            {
+                date.setearConsulta("insert into DISCOS(Titulo, FechaLanzamiento,CantidadCanciones,UrlImagenTapa,IdEstilo,IdTipoEdicion)values(@Titulo, @FechaLanzamiento,@CantidadCanciones,@UrlImagenTapa,@IdEstilo,@IdTipoEdicion)");
+                date.setearParametro("@Titulo", nuevo.Titulo);
+                date.setearParametro("@FechaLanzamiento", nuevo.FechaLanzamiento);
+                date.setearParametro("@CantidadCanciones", nuevo.CantidadCanciones);
+                date.setearParametro("@UrlImagenTapa", nuevo.Urlimagen);
+                date.setearParametro("@IdEstilo", nuevo.Estilo.Id);
+                date.setearParametro("@IdTipoEdicion",nuevo.TipoEdicion.Id);
+
+                date.ejecutarAccion();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally 
+            {
+                date.cerrarConexion();
             }
         }
     }
