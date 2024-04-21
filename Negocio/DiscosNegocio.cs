@@ -11,23 +11,32 @@ namespace Negocio
 {
     public class DiscosNegocio
     {
+        private AccesoDatos datos;
+        public DiscosNegocio() 
+        {
+            datos = new AccesoDatos(); 
+        }
+
         public List<Discos> Listar()
         {
             List<Discos> lista = new List<Discos>();
-            AccesoDatos datos = new AccesoDatos();
+            //AccesoDatos datos = new AccesoDatos();
 
             try
             {
-                datos.setearConsulta("select Titulo, FechaLanzamiento, CantidadCanciones, UrlImagenTapa, e.Descripcion Estilo, t.Descripcion Edicion from DISCOS d, ESTILOS e, TIPOSEDICION t where e.Id = d.IdEstilo and T.Id = d.IdTipoEdicion");
+                datos.setearConsulta("select d.Id IdDisco, Titulo, FechaLanzamiento, CantidadCanciones, UrlImagenTapa,e.Id IdEstilo, e.Descripcion Estilo,t.Id IdTipo, t.Descripcion Edicion from DISCOS d, ESTILOS e, TIPOSEDICION t where e.Id = d.IdEstilo and T.Id = d.IdTipoEdicion");
                 datos.ejecutarLectura();
                 while (datos.Lector.Read())
                 {
                     Discos aux = new Discos();
+                    aux.Id = (int)datos.Lector["IdDisco"];
                     aux.Titulo = (string)datos.Lector["Titulo"];
                     aux.FechaLanzamiento = (DateTime)datos.Lector["FechaLanzamiento"];
                     aux.CantidadCanciones = (int)datos.Lector["CantidadCanciones"];
                     aux.Urlimagen = (string)datos.Lector["UrlImagenTapa"];
+                    aux.Estilo.Id = (int)datos.Lector["IdEstilo"];
                     aux.Estilo.Descripcion = (string)datos.Lector["Estilo"];
+                    aux.TipoEdicion.Id = (int)datos.Lector["IdTipo"];
                     aux.TipoEdicion.Descripcion = (string)datos.Lector["Edicion"];
 
                     lista.Add(aux);
@@ -45,18 +54,18 @@ namespace Negocio
         }
         public void agregar(Discos nuevo)
         {
-            AccesoDatos date = new AccesoDatos();
+            //AccesoDatos date = new AccesoDatos();
             try
             {
-                date.setearConsulta("insert into DISCOS(Titulo, FechaLanzamiento,CantidadCanciones,UrlImagenTapa,IdEstilo,IdTipoEdicion)values(@Titulo, @FechaLanzamiento,@CantidadCanciones,@UrlImagenTapa,@IdEstilo,@IdTipoEdicion)");
-                date.setearParametro("@Titulo", nuevo.Titulo);
-                date.setearParametro("@FechaLanzamiento", nuevo.FechaLanzamiento);
-                date.setearParametro("@CantidadCanciones", nuevo.CantidadCanciones);
-                date.setearParametro("@UrlImagenTapa", nuevo.Urlimagen);
-                date.setearParametro("@IdEstilo", nuevo.Estilo.Id);
-                date.setearParametro("@IdTipoEdicion",nuevo.TipoEdicion.Id);
+                datos.setearConsulta("insert into DISCOS(Titulo, FechaLanzamiento,CantidadCanciones,UrlImagenTapa,IdEstilo,IdTipoEdicion)values(@Titulo, @FechaLanzamiento,@CantidadCanciones,@UrlImagenTapa,@IdEstilo,@IdTipoEdicion)");
+                datos.setearParametro("@Titulo", nuevo.Titulo);
+                datos.setearParametro("@FechaLanzamiento", nuevo.FechaLanzamiento);
+                datos.setearParametro("@CantidadCanciones", nuevo.CantidadCanciones);
+                datos.setearParametro("@UrlImagenTapa", nuevo.Urlimagen);
+                datos.setearParametro("@IdEstilo", nuevo.Estilo.Id);
+                datos.setearParametro("@IdTipoEdicion",nuevo.TipoEdicion.Id);
 
-                date.ejecutarAccion();
+                datos.ejecutarAccion();
             }
             catch (Exception ex)
             {
@@ -64,7 +73,35 @@ namespace Negocio
             }
             finally 
             {
-                date.cerrarConexion();
+                datos.cerrarConexion();
+            }
+        }
+        public void modificar(Discos modificado) 
+        {
+            //AccesoDatos datos = new AccesoDatos();
+            try
+            {
+                datos.setearConsulta("update DISCOS set Titulo = @Titulo, FechaLanzamiento = @Fecha, CantidadCanciones = @CantCaniones, UrlImagenTapa = @Url, IdEstilo = @IdEstilo, IdTipoEdicion = @IdTipo where id = @Id");
+                datos.setearParametro("@Titulo", modificado.Titulo);
+                datos.setearParametro("@Fecha", modificado.FechaLanzamiento);
+                datos.setearParametro("@CantCaniones", modificado.CantidadCanciones);
+                datos.setearParametro("@Url", modificado.Urlimagen);
+                datos.setearParametro("@IdEstilo", modificado.Estilo.Id);
+                datos.setearParametro("@IdTipo", modificado.TipoEdicion.Id);
+                datos.setearParametro("@Id",modificado.Id );
+
+                datos.ejecutarAccion();
+                    
+
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+            finally
+            {
+                datos.cerrarConexion();
             }
         }
     }

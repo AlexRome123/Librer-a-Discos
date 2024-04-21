@@ -71,5 +71,19 @@ namespace libreriaDiscos_app
             alta.ShowDialog();
             cargar();
         }
+
+        private void btnModificar_Click(object sender, EventArgs e)
+        {
+            if (dgvListaDiscos.CurrentRow != null)
+            {
+                Discos seleccionado;
+                seleccionado = (Discos)dgvListaDiscos.CurrentRow.DataBoundItem;
+                FrmAltaDiscos modificar = new FrmAltaDiscos(seleccionado);
+                modificar.ShowDialog();
+                cargar();
+            }
+            else
+                MessageBox.Show("Seleccione un Disco");
+        }
     }
 }

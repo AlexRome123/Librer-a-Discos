@@ -16,29 +16,46 @@ namespace libreriaDiscos_app
 {
     public partial class FrmAltaDiscos : Form
     {
+        private Discos disco = null;
         public FrmAltaDiscos()
         {
             InitializeComponent();
         }
+        public FrmAltaDiscos(Discos seleccionado)
+        {
+            InitializeComponent();
+            disco = seleccionado;
+            Text = "Modificar Disco";
+        }
         private void btnCnacelar_Click(object sender, EventArgs e)
         {
-            this.Close();
+            Close();
+
         }
         private void btnAceptar_Click(object sender, EventArgs e)
         {
-            Discos Disco = new Discos();
             DiscosNegocio negocio = new DiscosNegocio();
             try
             {
-                Disco.Titulo = txbNombre.Text;
-                Disco.FechaLanzamiento = dtpFecha.Value;
-                Disco.CantidadCanciones = int.Parse(txbCantCanciones.Text);
-                Disco.Urlimagen = txbUrlImagen.Text;
-                Disco.Estilo = (Estilos)cmbGenero.SelectedItem;
-                Disco.TipoEdicion = (TiposEdicion)cmbEdicion.SelectedItem;
-                
-                negocio.agregar(Disco);
-                MessageBox.Show("Agregado Exitosamente");
+                if (disco == null)
+                    disco = new Discos();
+                disco.Titulo = txbNombre.Text;
+                disco.FechaLanzamiento = dtpFecha.Value;
+                disco.CantidadCanciones = int.Parse(txbCantCanciones.Text);
+                disco.Urlimagen = txbUrlImagen.Text;
+                disco.Estilo = (Estilos)cmbGenero.SelectedItem;
+                disco.TipoEdicion = (TiposEdicion)cmbEdicion.SelectedItem;
+
+                if(disco.Id != 6)
+                {
+                    negocio.modificar(disco);
+                    MessageBox.Show("Modificado exitosamente");
+                }
+                else
+                {
+                    negocio.agregar(disco);
+                    MessageBox.Show("Agregado Exitosamente");
+                }
                 Close();
             }
             catch (Exception ex)
@@ -60,8 +77,20 @@ namespace libreriaDiscos_app
                 cmbEdicion.DataSource = tipo.Listar();
                 cmbEdicion.ValueMember = "Id";
                 cmbEdicion.DisplayMember = "Descripcion";
-                
-                cargarImagen("");
+
+                if (disco != null)
+                {
+                    txbNombre.Text = disco.Titulo;
+                    dtpFecha.Value = disco.FechaLanzamiento;
+                    txbCantCanciones.Text = disco.CantidadCanciones.ToString();
+                    txbUrlImagen.Text = disco.Urlimagen;
+                    cargarImagen(txbUrlImagen.Text);
+
+                    cmbGenero.SelectedValue = disco.Estilo.Id;
+                    cmbEdicion.SelectedValue = disco.TipoEdicion.Id;
+                }
+                else
+                    cargarImagen("");                   
             }
             catch (Exception ex)
             {
