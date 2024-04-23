@@ -77,6 +77,7 @@
             this.btnElimFisica.TabIndex = 3;
             this.btnElimFisica.Text = "Eliminar Física";
             this.btnElimFisica.UseVisualStyleBackColor = true;
+            this.btnElimFisica.Click += new System.EventHandler(this.btnElimFisica_Click);
             // 
             // BtnElimLogica
             // 

@@ -19,7 +19,6 @@ namespace libreriaDiscos_app
         {
             InitializeComponent();
         }
-
         private void FrmPrincipal_Load(object sender, EventArgs e)
         {
             cargar();
@@ -40,9 +39,7 @@ namespace libreriaDiscos_app
             {
 
                 MessageBox.Show(ex.ToString());
-            }
-
-            
+            }           
         }
         private void cargarImagen(string imagen)
         {
@@ -60,8 +57,8 @@ namespace libreriaDiscos_app
         {
             if(dgvListaDiscos != null)
             {
-                Discos seleccionado = (Discos)dgvListaDiscos.CurrentRow.DataBoundItem;
-                cargarImagen(seleccionado.Urlimagen);
+                Discos selec = (Discos)dgvListaDiscos.CurrentRow.DataBoundItem;
+                cargarImagen(selec.Urlimagen);
             }
         }
 
@@ -81,6 +78,32 @@ namespace libreriaDiscos_app
                 FrmAltaDiscos modificar = new FrmAltaDiscos(seleccionado);
                 modificar.ShowDialog();
                 cargar();
+            }
+            else
+                MessageBox.Show("Seleccione un Disco");
+        }
+
+        private void btnElimFisica_Click(object sender, EventArgs e)
+        {
+            if (dgvListaDiscos.CurrentRow != null)
+            {
+                Discos seleccionado = new Discos();
+                DiscosNegocio datos = new DiscosNegocio();
+                try
+                {
+                    DialogResult resultado = MessageBox.Show("¿Seguro deseas Eliminar?", "Eliminando", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+                    if (resultado == DialogResult.Yes) 
+                    {
+                        seleccionado = (Discos)dgvListaDiscos.CurrentRow.DataBoundItem;
+                        datos.Eliminar(seleccionado.Id);
+                        cargar();
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.ToString());
+                }
+                
             }
             else
                 MessageBox.Show("Seleccione un Disco");

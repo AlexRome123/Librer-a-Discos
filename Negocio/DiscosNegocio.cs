@@ -16,12 +16,9 @@ namespace Negocio
         {
             datos = new AccesoDatos(); 
         }
-
         public List<Discos> Listar()
         {
             List<Discos> lista = new List<Discos>();
-            //AccesoDatos datos = new AccesoDatos();
-
             try
             {
                 datos.setearConsulta("select d.Id IdDisco, Titulo, FechaLanzamiento, CantidadCanciones, UrlImagenTapa,e.Id IdEstilo, e.Descripcion Estilo,t.Id IdTipo, t.Descripcion Edicion from DISCOS d, ESTILOS e, TIPOSEDICION t where e.Id = d.IdEstilo and T.Id = d.IdTipoEdicion");
@@ -54,7 +51,6 @@ namespace Negocio
         }
         public void agregar(Discos nuevo)
         {
-            //AccesoDatos date = new AccesoDatos();
             try
             {
                 datos.setearConsulta("insert into DISCOS(Titulo, FechaLanzamiento,CantidadCanciones,UrlImagenTapa,IdEstilo,IdTipoEdicion)values(@Titulo, @FechaLanzamiento,@CantidadCanciones,@UrlImagenTapa,@IdEstilo,@IdTipoEdicion)");
@@ -78,7 +74,6 @@ namespace Negocio
         }
         public void modificar(Discos modificado) 
         {
-            //AccesoDatos datos = new AccesoDatos();
             try
             {
                 datos.setearConsulta("update DISCOS set Titulo = @Titulo, FechaLanzamiento = @Fecha, CantidadCanciones = @CantCaniones, UrlImagenTapa = @Url, IdEstilo = @IdEstilo, IdTipoEdicion = @IdTipo where id = @Id");
@@ -103,6 +98,20 @@ namespace Negocio
             {
                 datos.cerrarConexion();
             }
+        }
+        public void Eliminar (int Id)
+        {
+            try
+            {
+                datos.setearConsulta("delete from discos where id = @id");
+                datos.setearParametro("@id",Id);
+                datos.ejecutarAccion();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+
         }
     }
 }

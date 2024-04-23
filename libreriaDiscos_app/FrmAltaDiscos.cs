@@ -46,7 +46,7 @@ namespace libreriaDiscos_app
                 disco.Estilo = (Estilos)cmbGenero.SelectedItem;
                 disco.TipoEdicion = (TiposEdicion)cmbEdicion.SelectedItem;
 
-                if(disco.Id != 6)
+                if(disco.Id != 0)
                 {
                     negocio.modificar(disco);
                     MessageBox.Show("Modificado exitosamente");

@@ -36,15 +36,8 @@ namespace Negocio
             }
             catch (Exception ex)
             {
-
                 throw ex;
             }
-        }
-        public void cerrarConexion()
-        {
-            if (lector != null)
-                lector.Close();
-            conexion.Close();
         }
         public void setearParametro(string nombre, object valor)
         {
@@ -60,9 +53,14 @@ namespace Negocio
             }
             catch (Exception ex)
             {
-
                 throw ex;
             }
+        }
+        public void cerrarConexion()
+        {
+            if (lector != null)
+                lector.Close();
+            conexion.Close();
         }
     }
 }
