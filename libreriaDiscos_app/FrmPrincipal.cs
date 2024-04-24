@@ -30,16 +30,20 @@ namespace libreriaDiscos_app
                 DiscosNegocio datos = new DiscosNegocio();
                 ListaDiscos = datos.Listar();
                 dgvListaDiscos.DataSource = ListaDiscos;
-                dgvListaDiscos.Columns[0].Visible = false;
-                dgvListaDiscos.Columns[4].Visible = false;
                 cargarImagen(ListaDiscos[0].Urlimagen);
-                dgvListaDiscos.Columns[2].DefaultCellStyle.Format = "dd/MM/yyyy";
+                prepararDgv();
             }
             catch (Exception ex)
             {
 
                 MessageBox.Show(ex.ToString());
             }           
+        }
+        private void prepararDgv()
+        {
+            dgvListaDiscos.Columns[0].Visible = false;
+            dgvListaDiscos.Columns[4].Visible = false;
+            dgvListaDiscos.Columns[2].DefaultCellStyle.Format = "dd/MM/yyyy";
         }
         private void cargarImagen(string imagen)
         {
@@ -55,7 +59,7 @@ namespace libreriaDiscos_app
 
         private void dgvListaDiscos_SelectionChanged(object sender, EventArgs e)
         {
-            if(dgvListaDiscos != null)
+            if(dgvListaDiscos.CurrentRow != null)
             {
                 Discos selec = (Discos)dgvListaDiscos.CurrentRow.DataBoundItem;
                 cargarImagen(selec.Urlimagen);
@@ -107,6 +111,30 @@ namespace libreriaDiscos_app
             }
             else
                 MessageBox.Show("Seleccione un Disco");
+        }
+
+        private void btnbuscar_Click(object sender, EventArgs e)
+        {
+
+
+        }
+
+        private void txbFiltroRapido_TextChanged(object sender, EventArgs e)
+        {
+            List<Discos> listaFiltrada;
+            string filtro = txbFiltroRapido.Text;
+
+            if (filtro != "")
+            {
+                listaFiltrada = ListaDiscos.FindAll(x => x.Titulo.ToUpper().Contains(filtro.ToUpper()) || x.Estilo.Descripcion.ToUpper().Contains(filtro.ToUpper()) || x.TipoEdicion.Descripcion.ToUpper().Contains(filtro.ToUpper()));
+            }
+            else
+            {
+                listaFiltrada = ListaDiscos;
+            }
+            dgvListaDiscos.DataSource = null;
+            dgvListaDiscos.DataSource = listaFiltrada;
+            prepararDgv();
         }
     }
 }

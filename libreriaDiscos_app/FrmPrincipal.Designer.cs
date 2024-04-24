@@ -32,9 +32,9 @@
             this.ptbTapaDisco = new System.Windows.Forms.PictureBox();
             this.panel1 = new System.Windows.Forms.Panel();
             this.btnElimFisica = new System.Windows.Forms.Button();
-            this.BtnElimLogica = new System.Windows.Forms.Button();
             this.btnModificar = new System.Windows.Forms.Button();
             this.btnAgregar = new System.Windows.Forms.Button();
+            this.txbFiltroRapido = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.dgvListaDiscos)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ptbTapaDisco)).BeginInit();
             this.panel1.SuspendLayout();
@@ -60,10 +60,10 @@
             // 
             // panel1
             // 
+            this.panel1.Controls.Add(this.txbFiltroRapido);
             this.panel1.Controls.Add(this.btnElimFisica);
-            this.panel1.Controls.Add(this.BtnElimLogica);
-            this.panel1.Controls.Add(this.btnModificar);
             this.panel1.Controls.Add(this.btnAgregar);
+            this.panel1.Controls.Add(this.btnModificar);
             this.panel1.Location = new System.Drawing.Point(-8, -1);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(133, 454);
@@ -71,28 +71,19 @@
             // 
             // btnElimFisica
             // 
-            this.btnElimFisica.Location = new System.Drawing.Point(31, 160);
+            this.btnElimFisica.Location = new System.Drawing.Point(20, 418);
             this.btnElimFisica.Name = "btnElimFisica";
-            this.btnElimFisica.Size = new System.Drawing.Size(75, 39);
+            this.btnElimFisica.Size = new System.Drawing.Size(100, 21);
             this.btnElimFisica.TabIndex = 3;
-            this.btnElimFisica.Text = "Eliminar Física";
+            this.btnElimFisica.Text = "Eliminar";
             this.btnElimFisica.UseVisualStyleBackColor = true;
             this.btnElimFisica.Click += new System.EventHandler(this.btnElimFisica_Click);
             // 
-            // BtnElimLogica
-            // 
-            this.BtnElimLogica.Location = new System.Drawing.Point(31, 118);
-            this.BtnElimLogica.Name = "BtnElimLogica";
-            this.BtnElimLogica.Size = new System.Drawing.Size(75, 36);
-            this.BtnElimLogica.TabIndex = 2;
-            this.BtnElimLogica.Text = "Eliminar Lógica";
-            this.BtnElimLogica.UseVisualStyleBackColor = true;
-            // 
             // btnModificar
             // 
-            this.btnModificar.Location = new System.Drawing.Point(31, 89);
+            this.btnModificar.Location = new System.Drawing.Point(20, 371);
             this.btnModificar.Name = "btnModificar";
-            this.btnModificar.Size = new System.Drawing.Size(75, 23);
+            this.btnModificar.Size = new System.Drawing.Size(100, 23);
             this.btnModificar.TabIndex = 1;
             this.btnModificar.Text = "Modificar";
             this.btnModificar.UseVisualStyleBackColor = true;
@@ -100,13 +91,21 @@
             // 
             // btnAgregar
             // 
-            this.btnAgregar.Location = new System.Drawing.Point(31, 60);
+            this.btnAgregar.Location = new System.Drawing.Point(20, 60);
             this.btnAgregar.Name = "btnAgregar";
-            this.btnAgregar.Size = new System.Drawing.Size(75, 23);
+            this.btnAgregar.Size = new System.Drawing.Size(100, 23);
             this.btnAgregar.TabIndex = 0;
             this.btnAgregar.Text = "Agregar";
             this.btnAgregar.UseVisualStyleBackColor = true;
             this.btnAgregar.Click += new System.EventHandler(this.btnAgregar_Click);
+            // 
+            // txbFiltroRapido
+            // 
+            this.txbFiltroRapido.Location = new System.Drawing.Point(20, 328);
+            this.txbFiltroRapido.Name = "txbFiltroRapido";
+            this.txbFiltroRapido.Size = new System.Drawing.Size(100, 20);
+            this.txbFiltroRapido.TabIndex = 4;
+            this.txbFiltroRapido.TextChanged += new System.EventHandler(this.txbFiltroRapido_TextChanged);
             // 
             // FrmPrincipal
             // 
@@ -123,6 +122,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.dgvListaDiscos)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.ptbTapaDisco)).EndInit();
             this.panel1.ResumeLayout(false);
+            this.panel1.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -133,9 +133,9 @@
         private System.Windows.Forms.PictureBox ptbTapaDisco;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Button btnElimFisica;
-        private System.Windows.Forms.Button BtnElimLogica;
         private System.Windows.Forms.Button btnModificar;
         private System.Windows.Forms.Button btnAgregar;
+        private System.Windows.Forms.TextBox txbFiltroRapido;
     }
 }
 
