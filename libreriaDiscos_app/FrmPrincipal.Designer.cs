@@ -31,10 +31,14 @@
             this.dgvListaDiscos = new System.Windows.Forms.DataGridView();
             this.ptbTapaDisco = new System.Windows.Forms.PictureBox();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.btnElimFisica = new System.Windows.Forms.Button();
-            this.btnModificar = new System.Windows.Forms.Button();
-            this.btnAgregar = new System.Windows.Forms.Button();
             this.txbFiltroRapido = new System.Windows.Forms.TextBox();
+            this.btnElimFisica = new System.Windows.Forms.Button();
+            this.btnAgregar = new System.Windows.Forms.Button();
+            this.btnModificar = new System.Windows.Forms.Button();
+            this.txtFiltroAvanzado = new System.Windows.Forms.TextBox();
+            this.cmbCampo = new System.Windows.Forms.ComboBox();
+            this.cmbCriterio = new System.Windows.Forms.ComboBox();
+            this.btnBuscar = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgvListaDiscos)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ptbTapaDisco)).BeginInit();
             this.panel1.SuspendLayout();
@@ -69,6 +73,14 @@
             this.panel1.Size = new System.Drawing.Size(133, 454);
             this.panel1.TabIndex = 2;
             // 
+            // txbFiltroRapido
+            // 
+            this.txbFiltroRapido.Location = new System.Drawing.Point(20, 328);
+            this.txbFiltroRapido.Name = "txbFiltroRapido";
+            this.txbFiltroRapido.Size = new System.Drawing.Size(100, 20);
+            this.txbFiltroRapido.TabIndex = 4;
+            this.txbFiltroRapido.TextChanged += new System.EventHandler(this.txbFiltroRapido_TextChanged);
+            // 
             // btnElimFisica
             // 
             this.btnElimFisica.Location = new System.Drawing.Point(20, 418);
@@ -78,16 +90,6 @@
             this.btnElimFisica.Text = "Eliminar";
             this.btnElimFisica.UseVisualStyleBackColor = true;
             this.btnElimFisica.Click += new System.EventHandler(this.btnElimFisica_Click);
-            // 
-            // btnModificar
-            // 
-            this.btnModificar.Location = new System.Drawing.Point(20, 371);
-            this.btnModificar.Name = "btnModificar";
-            this.btnModificar.Size = new System.Drawing.Size(100, 23);
-            this.btnModificar.TabIndex = 1;
-            this.btnModificar.Text = "Modificar";
-            this.btnModificar.UseVisualStyleBackColor = true;
-            this.btnModificar.Click += new System.EventHandler(this.btnModificar_Click);
             // 
             // btnAgregar
             // 
@@ -99,19 +101,61 @@
             this.btnAgregar.UseVisualStyleBackColor = true;
             this.btnAgregar.Click += new System.EventHandler(this.btnAgregar_Click);
             // 
-            // txbFiltroRapido
+            // btnModificar
             // 
-            this.txbFiltroRapido.Location = new System.Drawing.Point(20, 328);
-            this.txbFiltroRapido.Name = "txbFiltroRapido";
-            this.txbFiltroRapido.Size = new System.Drawing.Size(100, 20);
-            this.txbFiltroRapido.TabIndex = 4;
-            this.txbFiltroRapido.TextChanged += new System.EventHandler(this.txbFiltroRapido_TextChanged);
+            this.btnModificar.Location = new System.Drawing.Point(20, 371);
+            this.btnModificar.Name = "btnModificar";
+            this.btnModificar.Size = new System.Drawing.Size(100, 23);
+            this.btnModificar.TabIndex = 1;
+            this.btnModificar.Text = "Modificar";
+            this.btnModificar.UseVisualStyleBackColor = true;
+            this.btnModificar.Click += new System.EventHandler(this.btnModificar_Click);
+            // 
+            // txtFiltroAvanzado
+            // 
+            this.txtFiltroAvanzado.Location = new System.Drawing.Point(557, 32);
+            this.txtFiltroAvanzado.Name = "txtFiltroAvanzado";
+            this.txtFiltroAvanzado.Size = new System.Drawing.Size(137, 20);
+            this.txtFiltroAvanzado.TabIndex = 3;
+            // 
+            // cmbCampo
+            // 
+            this.cmbCampo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbCampo.FormattingEnabled = true;
+            this.cmbCampo.Location = new System.Drawing.Point(282, 32);
+            this.cmbCampo.Name = "cmbCampo";
+            this.cmbCampo.Size = new System.Drawing.Size(121, 21);
+            this.cmbCampo.TabIndex = 4;
+            this.cmbCampo.SelectedIndexChanged += new System.EventHandler(this.cmbCampo_SelectedIndexChanged);
+            // 
+            // cmbCriterio
+            // 
+            this.cmbCriterio.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbCriterio.FormattingEnabled = true;
+            this.cmbCriterio.Location = new System.Drawing.Point(420, 33);
+            this.cmbCriterio.Name = "cmbCriterio";
+            this.cmbCriterio.Size = new System.Drawing.Size(121, 21);
+            this.cmbCriterio.TabIndex = 5;
+            // 
+            // btnBuscar
+            // 
+            this.btnBuscar.Location = new System.Drawing.Point(713, 32);
+            this.btnBuscar.Name = "btnBuscar";
+            this.btnBuscar.Size = new System.Drawing.Size(75, 23);
+            this.btnBuscar.TabIndex = 6;
+            this.btnBuscar.Text = "Buscar";
+            this.btnBuscar.UseVisualStyleBackColor = true;
+            this.btnBuscar.Click += new System.EventHandler(this.btnBuscar_Click);
             // 
             // FrmPrincipal
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.btnBuscar);
+            this.Controls.Add(this.cmbCriterio);
+            this.Controls.Add(this.cmbCampo);
+            this.Controls.Add(this.txtFiltroAvanzado);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.ptbTapaDisco);
             this.Controls.Add(this.dgvListaDiscos);
@@ -124,6 +168,7 @@
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -136,6 +181,10 @@
         private System.Windows.Forms.Button btnModificar;
         private System.Windows.Forms.Button btnAgregar;
         private System.Windows.Forms.TextBox txbFiltroRapido;
+        private System.Windows.Forms.TextBox txtFiltroAvanzado;
+        private System.Windows.Forms.ComboBox cmbCampo;
+        private System.Windows.Forms.ComboBox cmbCriterio;
+        private System.Windows.Forms.Button btnBuscar;
     }
 }
 

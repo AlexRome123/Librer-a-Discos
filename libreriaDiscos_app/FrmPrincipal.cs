@@ -22,6 +22,8 @@ namespace libreriaDiscos_app
         private void FrmPrincipal_Load(object sender, EventArgs e)
         {
             cargar();
+            cmbCampo.Items.Add("Título");
+            cmbCampo.Items.Add("Cant. Canciones");
         }
         private void cargar()
         {
@@ -113,11 +115,6 @@ namespace libreriaDiscos_app
                 MessageBox.Show("Seleccione un Disco");
         }
 
-        private void btnbuscar_Click(object sender, EventArgs e)
-        {
-
-
-        }
 
         private void txbFiltroRapido_TextChanged(object sender, EventArgs e)
         {
@@ -135,6 +132,43 @@ namespace libreriaDiscos_app
             dgvListaDiscos.DataSource = null;
             dgvListaDiscos.DataSource = listaFiltrada;
             prepararDgv();
+        }
+
+        private void cmbCampo_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            string opcion = cmbCampo.SelectedItem.ToString();
+            if(opcion == "Título")
+            {
+                cmbCriterio.Items.Clear();
+                cmbCriterio.Items.Add("Comienza con");
+                cmbCriterio.Items.Add("Termina con");
+                cmbCriterio.Items.Add("Contiene");
+            }
+            else
+            {
+                cmbCriterio.Items.Clear();
+                cmbCriterio.Items.Add("Mayor a");
+                cmbCriterio.Items.Add("Menor a");
+                cmbCriterio.Items.Add("Igual a");
+            }
+        }
+
+        private void btnBuscar_Click(object sender, EventArgs e)
+        {
+            DiscosNegocio negocio = new DiscosNegocio();
+            try
+            {
+                string campo = cmbCampo.SelectedItem.ToString();
+                string criterio = cmbCriterio.SelectedItem.ToString();
+                string filtro = txtFiltroAvanzado.Text;
+                dgvListaDiscos.DataSource = negocio.filtrar(campo, criterio, filtro);
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
+
         }
     }
 }
