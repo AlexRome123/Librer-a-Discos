@@ -84,6 +84,7 @@
             this.txbCantCanciones.Name = "txbCantCanciones";
             this.txbCantCanciones.Size = new System.Drawing.Size(200, 20);
             this.txbCantCanciones.TabIndex = 4;
+            this.txbCantCanciones.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txbCantCanciones_KeyPress);
             // 
             // txbUrlImagen
             // 

@@ -55,7 +55,7 @@
             // 
             // ptbTapaDisco
             // 
-            this.ptbTapaDisco.Location = new System.Drawing.Point(123, 59);
+            this.ptbTapaDisco.Location = new System.Drawing.Point(123, 33);
             this.ptbTapaDisco.Name = "ptbTapaDisco";
             this.ptbTapaDisco.Size = new System.Drawing.Size(153, 153);
             this.ptbTapaDisco.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -93,7 +93,7 @@
             // 
             // btnAgregar
             // 
-            this.btnAgregar.Location = new System.Drawing.Point(20, 60);
+            this.btnAgregar.Location = new System.Drawing.Point(20, 34);
             this.btnAgregar.Name = "btnAgregar";
             this.btnAgregar.Size = new System.Drawing.Size(100, 23);
             this.btnAgregar.TabIndex = 0;
@@ -117,6 +117,7 @@
             this.txtFiltroAvanzado.Name = "txtFiltroAvanzado";
             this.txtFiltroAvanzado.Size = new System.Drawing.Size(137, 20);
             this.txtFiltroAvanzado.TabIndex = 3;
+            this.txtFiltroAvanzado.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtFiltroAvanzado_KeyPress);
             // 
             // cmbCampo
             // 
@@ -136,6 +137,7 @@
             this.cmbCriterio.Name = "cmbCriterio";
             this.cmbCriterio.Size = new System.Drawing.Size(121, 21);
             this.cmbCriterio.TabIndex = 5;
+            this.cmbCriterio.SelectedIndexChanged += new System.EventHandler(this.cmbCriterio_SelectedIndexChanged);
             // 
             // btnBuscar
             // 

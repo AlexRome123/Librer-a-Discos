@@ -18,6 +18,8 @@ namespace libreriaDiscos_app
         public FrmPrincipal()
         {
             InitializeComponent();
+            txtFiltroAvanzado.Enabled = false;
+            btnBuscar.Enabled = false;
         }
         private void FrmPrincipal_Load(object sender, EventArgs e)
         {
@@ -137,7 +139,10 @@ namespace libreriaDiscos_app
         private void cmbCampo_SelectedIndexChanged(object sender, EventArgs e)
         {
             string opcion = cmbCampo.SelectedItem.ToString();
-            if(opcion == "Título")
+            txtFiltroAvanzado.Clear();
+            txtFiltroAvanzado.Enabled = false;
+            btnBuscar.Enabled = false;
+            if (opcion == "Título")
             {
                 cmbCriterio.Items.Clear();
                 cmbCriterio.Items.Add("Comienza con");
@@ -152,7 +157,10 @@ namespace libreriaDiscos_app
                 cmbCriterio.Items.Add("Igual a");
             }
         }
-
+        private void cmbCriterio_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            txtFiltroAvanzado.Enabled = true;
+        }
         private void btnBuscar_Click(object sender, EventArgs e)
         {
             DiscosNegocio negocio = new DiscosNegocio();
@@ -161,14 +169,25 @@ namespace libreriaDiscos_app
                 string campo = cmbCampo.SelectedItem.ToString();
                 string criterio = cmbCriterio.SelectedItem.ToString();
                 string filtro = txtFiltroAvanzado.Text;
-                dgvListaDiscos.DataSource = negocio.filtrar(campo, criterio, filtro);
 
+                dgvListaDiscos.DataSource = negocio.filtrar(campo, criterio, filtro);
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.ToString());
+                return;
             }
-
+        }
+        private void txtFiltroAvanzado_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            string opcionB = cmbCampo.SelectedItem.ToString();
+            if (opcionB != "Título")
+            {
+                if (!char.IsDigit(e.KeyChar) && !char.IsControl(e.KeyChar))
+                {
+                    e.Handled= true;
+                }
+            }           
+            btnBuscar.Enabled = true;
         }
     }
 }

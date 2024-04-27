@@ -34,33 +34,43 @@ namespace libreriaDiscos_app
         }
         private void btnAceptar_Click(object sender, EventArgs e)
         {
-            DiscosNegocio negocio = new DiscosNegocio();
-            try
+            if(txbNombre.Text !="" && txbCantCanciones.Text !="")
             {
-                if (disco == null)
-                    disco = new Discos();
-                disco.Titulo = txbNombre.Text;
-                disco.FechaLanzamiento = dtpFecha.Value;
-                disco.CantidadCanciones = int.Parse(txbCantCanciones.Text);
-                disco.Urlimagen = txbUrlImagen.Text;
-                disco.Estilo = (Estilos)cmbGenero.SelectedItem;
-                disco.TipoEdicion = (TiposEdicion)cmbEdicion.SelectedItem;
+                DiscosNegocio negocio = new DiscosNegocio();
+                try
+                {
+                    if (disco == null)
+                        disco = new Discos();
+                    disco.Titulo = txbNombre.Text;
+                    disco.FechaLanzamiento = dtpFecha.Value;
+                    disco.CantidadCanciones = int.Parse(txbCantCanciones.Text);
+                    disco.Urlimagen = txbUrlImagen.Text;
+                    disco.Estilo = (Estilos)cmbGenero.SelectedItem;
+                    disco.TipoEdicion = (TiposEdicion)cmbEdicion.SelectedItem;
 
-                if(disco.Id != 0)
-                {
-                    negocio.modificar(disco);
-                    MessageBox.Show("Modificado exitosamente");
+                    if(disco.Id != 0)
+                    {
+                        negocio.modificar(disco);
+                        MessageBox.Show("Modificado exitosamente");
+                    }
+                    else
+                    {
+                        negocio.agregar(disco);
+                        MessageBox.Show("Agregado Exitosamente");
+                    }
+                    Close();
                 }
-                else
+                catch (Exception ex)
                 {
-                    negocio.agregar(disco);
-                    MessageBox.Show("Agregado Exitosamente");
+                    MessageBox.Show(ex.ToString());
                 }
-                Close();
             }
-            catch (Exception ex)
+            else
             {
-                MessageBox.Show(ex.ToString());
+                if(txbNombre.Text == "")
+                    txbNombre.BackColor = Color.Red;
+                if(txbCantCanciones.Text == "")
+                    txbCantCanciones.BackColor = Color.Red;
             }
         }
         private void FrmAltaDiscos_Load(object sender, EventArgs e)
@@ -113,6 +123,14 @@ namespace libreriaDiscos_app
         private void txbUrlImagen_Leave(object sender, EventArgs e)
         {
             cargarImagen(txbUrlImagen.Text);
+        }
+
+        private void txbCantCanciones_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsDigit(e.KeyChar) && !char.IsControl(e.KeyChar))
+            {
+                e.Handled = true;
+            }
         }
     }
 }
